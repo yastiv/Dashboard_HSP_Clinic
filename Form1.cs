@@ -47,7 +47,15 @@ namespace Build_4
             //Displays the upcoming appointments...
             UpcomingAppointments();
             //Displays the MEDICINE STOCK if its below 10 or expiry date is within 7 days of current date...
-            
+            con.Open();
+            DateTime time = DateTime.Now;
+            string format = "yyyy-MM-dd";
+            MySqlCommand command = new MySqlCommand("Select medicine_name, stock_amount, measurement, expiry_date, batch_number from medicine where stock_amount < 10  or expiry_date < date_Add(curdate(), interval 7 day)", con);
+            MySqlDataAdapter sd = new MySqlDataAdapter(command);
+            DataTable dt = new DataTable();
+            sd.Fill(dt);
+            Medicine_View.DataSource = dt;
+            con.Close();
         }
         
         private void Student_Button_Click(object sender, EventArgs e)
@@ -138,7 +146,24 @@ namespace Build_4
             //Preloads the set measurements...
             LoadMeasurment();
             //Database...
-            
+            con.Open();
+            MySqlCommand combocmd = new MySqlCommand("Select diagnosis_id, diagnosis_type from diagnosis", con);
+            MySqlDataAdapter da = new MySqlDataAdapter();
+            da.SelectCommand = combocmd;
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            Treatment_Add_Diagnosis_ComboBox.DataSource = dt;
+            Treatment_Add_Diagnosis_ComboBox.DisplayMember = "diagnosis_type";
+            Treatment_Add_Diagnosis_ComboBox.ValueMember = "diagnosis_id";
+            MySqlCommand combocmd2 = new MySqlCommand("Select medicine_id, medicine_name from medicine", con);
+            MySqlDataAdapter da2 = new MySqlDataAdapter();
+            da2.SelectCommand = combocmd2;
+            DataTable dt2 = new DataTable();
+            da2.Fill(dt2);
+            Treatment_Add_MedicineName_ComboBox.DataSource = dt2;
+            Treatment_Add_MedicineName_ComboBox.DisplayMember = "medicine_name";
+            Treatment_Add_MedicineName_ComboBox.ValueMember = "medicine_id";            
+            con.Close();
         }
         
          private void Treatment_Header_Search_Button_Click(object sender, EventArgs e)
@@ -176,7 +201,13 @@ namespace Build_4
             ClearDiagnosisStatistics();
             ClearDiagnosisView();
             //Database...
-            
+            con.Open();
+            MySqlCommand command = new MySqlCommand("Select diagnosis_type from diagnosis", con);
+            MySqlDataAdapter sd = new MySqlDataAdapter(command);
+            DataTable dt = new DataTable();
+            sd.Fill(dt);
+            Diagnosis_ViewAll.DataSource = dt;
+            con.Close();
         }
         
         private void Diagnosis_Header_Add_Button_Click(object sender, EventArgs e)
@@ -197,7 +228,16 @@ namespace Build_4
             ClearDiagnosisStatistics();
             ClearDiagnosisView();
             //Database...
-                       
+            con.Open();
+            MySqlCommand combocmd = new MySqlCommand("Select diagnosis_id, diagnosis_type from diagnosis", con);
+            MySqlDataAdapter da = new MySqlDataAdapter();
+            da.SelectCommand = combocmd;
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            Diagnosis_Add_Edit_ComboBox.DataSource = dt;
+            Diagnosis_Add_Edit_ComboBox.DisplayMember = "diagnosis_type";
+            Diagnosis_Add_Edit_ComboBox.ValueMember = "diagnosis_id";
+            con.Close();
         }
         
         private void Diagnosis_Header_Statistics_Button_Click(object sender, EventArgs e)
@@ -218,7 +258,16 @@ namespace Build_4
             ClearDiagnosisStatistics();
             ClearDiagnosisView();
             //Database...
-            
+            con.Open();
+            MySqlCommand combocmd = new MySqlCommand("Select diagnosis_id, diagnosis_type from diagnosis", con);
+            MySqlDataAdapter da = new MySqlDataAdapter();
+            da.SelectCommand = combocmd;
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            Diagnosis_Statistic_DiagnosisType_ComboBox.DataSource = dt;
+            Diagnosis_Statistic_DiagnosisType_ComboBox.DisplayMember = "diagnosis_type";
+            Diagnosis_Statistic_DiagnosisType_ComboBox.ValueMember = "diagnosis_id";
+            con.Close();
         }
         
         private void Medicine_Header_View_Button_Click(object sender, EventArgs e)
@@ -239,7 +288,13 @@ namespace Build_4
             ClearMedicineAdd();
             ClearMedicineView();
             //Database...
-            
+            con.Open();
+            MySqlCommand command = new MySqlCommand("Select medicine_name, stock_amount, measurement, expiry_date, batch_number from medicine", con);
+            MySqlDataAdapter sd = new MySqlDataAdapter(command);
+            DataTable dt = new DataTable();
+            sd.Fill(dt);
+            Medicine_ViewAll.DataSource = dt;
+            con.Close();
         }
         
         private void Medicine_Header_Add_Button_Click(object sender, EventArgs e)
@@ -281,7 +336,16 @@ namespace Build_4
             ClearMedicineAdd();
             ClearMedicineView();
             //Database...
-                      
+            con.Open();
+            MySqlCommand combocmd = new MySqlCommand("Select medicine_id, medicine_name from medicine", con);
+            MySqlDataAdapter da = new MySqlDataAdapter();
+            da.SelectCommand = combocmd;
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            Medicine_Edit_MedicineName_ComboBox.DataSource = dt;
+            Medicine_Edit_MedicineName_ComboBox.DisplayMember = "medicine_name";
+            Medicine_Edit_MedicineName_ComboBox.ValueMember = "medicine_id";
+            con.Close();
         }
         
         private void Student_Search_Button_Click(object sender, EventArgs e)
@@ -292,7 +356,28 @@ namespace Build_4
             Student_Search_Button.BackColor = Color.LightCyan;
             Student_Search_Button.ForeColor = Color.DarkCyan;
             //SYSTEM Should SEARCH THROUGH DATABASE TO FIND STUDENT NUMBER AND OTHER INFORMATION for display in these items...
-           
+            con.Open();
+            MySqlCommand command = new MySqlCommand("Select first_name, last_name, address, email, phone_number, gender, DOB, allergies from users where student_number = '" + Student_StudentNumber_TextBox.Text + "'", con);
+            MySqlDataReader srd = command.ExecuteReader();
+            while (srd.Read())
+            {
+                Student_FirstName_TextBox.Text = srd.GetValue(0).ToString();
+                Student_LastName_TextBox.Text = srd.GetValue(1).ToString();
+                Student_Address_TextBox.Text = srd.GetValue(2).ToString();
+                Student_Email_TextBox.Text = srd.GetValue(3).ToString();
+                Student_PhoneNumber_TextBox.Text = srd.GetValue(4).ToString();
+                if (srd.GetValue(5).ToString() == "M")
+                {
+                    Student_Gender_Male_RadioButton.Checked = true;
+                }
+                if (srd.GetValue(5).ToString() == "F")
+                {
+                    Student_Gender_Female_RadioButton.Checked = true;
+                }
+                Student_DateOfBirth_DateTimePicker.Text = srd.GetValue(6).ToString();
+                Student_Allergies_TextBox.Text = srd.GetValue(7).ToString();
+            }
+            con.Close();
         }
         
         private void Student_Edit_Button_Click(object sender, EventArgs e)
@@ -303,7 +388,25 @@ namespace Build_4
             Student_Edit_Button.BackColor = Color.LightCyan;
             Student_Edit_Button.ForeColor = Color.DarkCyan;
             //Database...
-            
+            string gender;
+            if (Student_Gender_Male_RadioButton.Checked == true)
+            {
+                gender = "M";
+                con.Open();
+                MySqlCommand command = new MySqlCommand("Update users set first_name = '" + Student_FirstName_TextBox.Text + "', last_name = '" + Student_LastName_TextBox.Text + "', address = '" + Student_Address_TextBox.Text + "', email = '" + Student_Email_TextBox.Text + "', phone_number = '" + Student_PhoneNumber_TextBox.Text + "', gender = '" + gender + "', DOB = '" + Student_DateOfBirth_DateTimePicker.Value.Date.ToString("yyyyMMdd") + "', allergies = '" + Student_Allergies_TextBox.Text + "'where student_number = '" + Student_StudentNumber_TextBox.Text + "'", con);
+                command.ExecuteNonQuery();
+                con.Close();
+            }
+            if (Student_Gender_Female_RadioButton.Checked == true)
+            {
+                gender = "F";
+                con.Open();
+                MySqlCommand command = new MySqlCommand("Update users set first_name = '" + Student_FirstName_TextBox.Text + "', last_name = '" + Student_LastName_TextBox.Text + "', address = '" + Student_Address_TextBox.Text + "', email = '" + Student_Email_TextBox.Text + "', phone_number = '" + Student_PhoneNumber_TextBox.Text + "', gender = '" + gender + "', DOB = '" + Student_DateOfBirth_DateTimePicker.Value.Date.ToString("yyyyMMdd") + "', allergies = '" + Student_Allergies_TextBox.Text + "'where student_number = '" + Student_StudentNumber_TextBox.Text + "'", con);
+                command.ExecuteNonQuery();
+                con.Close();
+            }
+            //Message Box showing the user the action is completed...
+            MessageBox.Show("USER EDITED IN THE DATABASE!!!");
         }
         
         private void Student_Delete_Button_Click(object sender, EventArgs e)
@@ -314,7 +417,21 @@ namespace Build_4
             Student_Delete_Button.BackColor = Color.LightCoral;
             Student_Delete_Button.ForeColor = Color.Black;
             //Database...
-            
+            if (Student_StudentNumber_TextBox.Text != "")
+            {
+                con.Open();
+                MySqlCommand command = new MySqlCommand("Delete from users where student_number = '" + Student_StudentNumber_TextBox.Text + "'", con);
+                command.ExecuteNonQuery();
+                con.Close();
+                //Message Box showing the user the action is completed...
+                MessageBox.Show("USER DELETED FROM THE DATABASE!!!");
+            }
+            else
+            {
+                MessageBox.Show("Please enter a student number");
+            }
+            //Message Box showing the user the action is completed...
+            MessageBox.Show("USER DELETED FROM THE DATABASE!!!");
         }
         
         private void Treatment_Add_Add_Button_Click(object sender, EventArgs e)
@@ -325,7 +442,16 @@ namespace Build_4
             Treatment_Add_Add_Button.BackColor = Color.LightCyan;
             Treatment_Add_Add_Button.ForeColor = Color.DarkCyan;
             //Saves to the DATABASE...
-            
+            DateTime time = DateTime.Now;
+            string format = "yyyy-MM-dd HH:mm:ss";
+            con.Open();
+            MySqlCommand command = new MySqlCommand("Insert into treatment (student_number, curr_date, diagnosis_type, treatment_notes, medicine_name, amount_dispensed, measurement, next_appointment, issued_by) values ('" + Treatment_Add_StudentNumber_TextBox.Text + "','" + DateTime.Now.Date.ToString("yyyyMMdd") + "','" + Treatment_Add_Diagnosis_ComboBox.Text + "','" + Treatment_Add_TreatmentNotes_TextBox.Text + "','" + Treatment_Add_MedicineName_ComboBox.Text + "','" + Treatment_Add_AmountDispensed_TextBox.Text + "','" + Treatment_Add_Measurement_ComboBox.Text + "','" + Treatment_Add_NextAppointment_DateTimePicker.Value.Date.ToString("yyyyMMdd") + "','" + Treatment_Add_IssuedBy_TextBox.Text + "')", con);
+            command.ExecuteNonQuery();
+            MySqlCommand command2 = new MySqlCommand("Update medicine set stock_amount = medicine.stock_amount - '" + Treatment_Add_AmountDispensed_TextBox.Text + "'where medicine_name = '" + Treatment_Add_MedicineName_ComboBox.Text + "'", con);
+            command2.ExecuteNonQuery();
+            con.Close();
+            //Message Box showing the user the action is completed...
+            MessageBox.Show("TREATMENT HAS BEEN ADDED!!!");
         }
         
         private void Treatment_Search_Search_Button_Click(object sender, EventArgs e)
@@ -336,7 +462,13 @@ namespace Build_4
             Treatment_Search_Search_Button.BackColor = Color.LightCyan;
             Treatment_Search_Search_Button.ForeColor = Color.DarkCyan;
             //SEARCHES THE DATABASE and DISPLAYS...  
-            
+            con.Open();
+            MySqlCommand command = new MySqlCommand("Select curr_date, diagnosis_type, treatment_notes, medicine_name, amount_dispensed, measurement from treatment where student_number = '" + Treatment_Search_StudentNumber_TextBox.Text + "'", con);
+            MySqlDataAdapter sd = new MySqlDataAdapter(command);
+            DataTable dt = new DataTable();
+            sd.Fill(dt);
+            Treatment_Search_View.DataSource = dt;
+            con.Close();
         }
         
         private void Diagnosis_Add_Add_Button_Click(object sender, EventArgs e)
@@ -347,7 +479,12 @@ namespace Build_4
             Diagnosis_Add_Add_Button.BackColor = Color.LightCyan;
             Diagnosis_Add_Add_Button.ForeColor = Color.DarkCyan;
             //ADDS to the DATABASE...
-            
+            con.Open();
+            MySqlCommand command = new MySqlCommand("Insert into diagnosis (diagnosis_type) values ('" + Diagnosis_Add_DiagnosisName_TextBox.Text + "')", con);
+            command.ExecuteNonQuery();
+            con.Close();
+            //Message Box showing the user the action is completed...
+            MessageBox.Show("DIAGNOSIS ADDED TO THE DATABASE!!!");
         } 
         
         string diagnosis;
@@ -360,7 +497,12 @@ namespace Build_4
             Diagnosis_Add_Edit_Button.BackColor = Color.LightCyan;
             Diagnosis_Add_Edit_Button.ForeColor = Color.DarkCyan;
             // EDITS ITEM FROM THE DATABASE...         
-
+            con.Open();
+            MySqlCommand command = new MySqlCommand("Update diagnosis set diagnosis_type = '" + Diagnosis_Add_Edit_ComboBox.Text +"' WHERE diagnosis_type ='"+ diagnosis +"'", con);
+            command.ExecuteNonQuery();
+            con.Close();
+            //Message Box showing the user the action is completed...
+            MessageBox.Show("ITEM HAS BEEN EDITED IN THE DATABASE!!!");
         } 
         
         private void Diagnosis_Add_Edit_ComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -376,7 +518,12 @@ namespace Build_4
             Diagnosis_Add_Delete_Button.BackColor = Color.LightCoral;
             Diagnosis_Add_Delete_Button.ForeColor = Color.Black;
             // DELETES ITEM FROM THE DATABASE...
-           
+            con.Open();
+            MySqlCommand command = new MySqlCommand("Delete from diagnosis where diagnosis_type = '" + Diagnosis_Add_Edit_ComboBox.Text + "'", con);
+            command.ExecuteNonQuery();
+            con.Close();
+            //Message Box showing the user the action is completed...
+            MessageBox.Show("ITEM HAS BEEN DELETED FROM THE DATABASE!!!");
         }
         
         private void Diagnosis_Statistic_Search_Button_Click(object sender, EventArgs e)
@@ -387,7 +534,11 @@ namespace Build_4
             Diagnosis_Statistic_Search_Button.BackColor = Color.LightCyan;
             Diagnosis_Statistic_Search_Button.ForeColor = Color.DarkCyan;
             //SEARCHES THE DATABASE and DISPLAYS the NUMBER...   
-           
+            con.Open();
+            MySqlCommand command = new MySqlCommand("Select count(*) from treatment where diagnosis_type = '" + Diagnosis_Statistic_DiagnosisType_ComboBox.Text + "' and curr_date between '" + Diagnosis_Statistic_StartDate_DateTimePicker.Value.Date.ToString("yyyyMMdd") + "' and '" + Diagnosis_Statistic_EndDate_DateTimePicker.Value.Date.ToString("yyyyMMdd") + "'", con);
+            var countDiagnosis = command.ExecuteScalar();
+            Diagnosis_Statistic_Label_5.Text = countDiagnosis.ToString();
+            con.Close();
         }
 
         private void Medicine_Add_Add_Button_Click(object sender, EventArgs e)
@@ -398,7 +549,14 @@ namespace Build_4
             Medicine_Add_Add_Button.BackColor = Color.LightCyan;
             Medicine_Add_Add_Button.ForeColor = Color.DarkCyan;
             // ADDS ITEM TO THE DATABASE...
-          
+            DateTime time = DateTime.Now;
+            string format = "yyyy-MM-dd HH:mm:ss";
+            con.Open();
+            MySqlCommand command = new MySqlCommand("Insert into medicine (medicine_name, stock_amount, measurement, expiry_date, batch_number) values ('" + Medicine_Add_MedicineName_TextBox.Text + "','" + Medicine_Add_StockAmount_TextBox.Text + "','" + Medicine_Add_Measurement_ComboBox.Text + "','" + Medicine_Add_ExpiryDate_TimeDatePicker.Value.Date.ToString("yyyyMMdd") + "','" + Medicine_Add_BatchNumber_TextBox.Text + "')", con);
+            command.ExecuteNonQuery();
+            con.Close();
+            //Message Box showing the user the action is completed...
+            MessageBox.Show("ITEM HAS BEEN ADDED TO THE DATABASE!!!");
         }
 
         private void Medicine_Edit_Edit_Button_Click(object sender, EventArgs e)
@@ -409,7 +567,12 @@ namespace Build_4
             Medicine_Edit_Edit_Button.BackColor = Color.LightCyan;
             Medicine_Edit_Edit_Button.ForeColor = Color.DarkCyan;
             // ITEM HAS BEEN EDITIED IN DATABASE...
-            
+            con.Open();
+            MySqlCommand command = new MySqlCommand("Update medicine set stock_amount = '" + Medicine_Edit_StockAmount_TextBox.Text + "', measurement = '" + Medicine_Edit_Measurement_ComboBox.Text + "', expiry_date = '" + Medicine_Edit_ExpiryDate_DateTimePicker.Value.Date.ToString("yyyyMMdd") + "', batch_number = '" + Medicine_Edit_BatchNumber_TextBox.Text + "'where medicine_name = '" + Medicine_Edit_MedicineName_ComboBox.Text + "'", con);
+            command.ExecuteNonQuery();
+            con.Close();
+            //Message Box showing the user the action is completed...
+            MessageBox.Show("ITEM HAS BEEN EDITIED IN THE DATABASE!!!");
         }
 
         private void Medicine_Edit_Delete_Button_Click(object sender, EventArgs e)
@@ -420,19 +583,43 @@ namespace Build_4
             Medicine_Edit_Delete_Button.BackColor = Color.LightCoral;
             Medicine_Edit_Delete_Button.ForeColor = Color.Black;
             // ITEM HAS BEEN DELETED FROM THE DATABASE...
-            
+            con.Open();
+            MySqlCommand command = new MySqlCommand("Delete from medicine where medicine_name = '" + Medicine_Edit_MedicineName_ComboBox.Text + "'", con);
+            command.ExecuteNonQuery();
+            con.Close();
+            //Message Box showing the user the action is completed...
+            MessageBox.Show("ITEM HAS BEEN DELETED FROM THE DATABASE!!!");
         }
         
         private void Medicine_Edit_MedicineName_ComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             //Database...
-            
+            con.Close();
+            con.Open();
+            MySqlCommand command = new MySqlCommand("Select stock_amount, measurement, expiry_date, batch_number from medicine where medicine_name = '" + Medicine_Edit_MedicineName_ComboBox.Text + "'", con);
+            MySqlDataReader srd = command.ExecuteReader();
+            while (srd.Read())
+            {
+                Medicine_Edit_StockAmount_TextBox.Text = srd.GetValue(0).ToString();
+                Medicine_Edit_Measurement_ComboBox.Text = srd.GetValue(1).ToString();
+                Medicine_Edit_ExpiryDate_DateTimePicker.Text = srd.GetValue(2).ToString();
+                Medicine_Edit_BatchNumber_TextBox.Text = srd.GetValue(3).ToString();
+            }
+            con.Close();
         }
         
         private void Treatment_Add_MedicineName_ComboBox_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             //Database...
-            
+            con.Close();
+            con.Open();
+            MySqlCommand command = new MySqlCommand("Select measurement from medicine where medicine_name = '" + Treatment_Add_MedicineName_ComboBox.Text + "'", con);
+            MySqlDataReader srd = command.ExecuteReader();
+            while (srd.Read())
+            {
+                Treatment_Add_Measurement_ComboBox.Text = srd.GetValue(0).ToString();
+            }
+            con.Close();
         }
         static string[] Scopes = { CalendarService.Scope.CalendarReadonly };
         static string ApplicationName = "Google Calendar API .NET Quickstart";
