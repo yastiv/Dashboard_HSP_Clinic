@@ -498,6 +498,114 @@ namespace Build_4
             UpcomingAppointments();
         }
 
+public void ClearStudent()
+        {
+            Student_StudentNumber_TextBox.Text = "";
+            Student_FirstName_TextBox.Text = "";
+            Student_LastName_TextBox.Text = "";
+            Student_Address_TextBox.Text = "";
+            Student_Email_TextBox.Text = "";
+            Student_PhoneNumber_TextBox.Text = "";
+            Student_Gender_Male_RadioButton.Checked = false;
+            Student_Gender_Female_RadioButton.Checked = false;
+            Student_DateOfBirth_DateTimePicker.Text = "";
+            Student_Allergies_TextBox.Text = "";
+        }
+
+        public void ClearTreatmentSearch()
+        {
+            Treatment_Search_StudentNumber_TextBox.Text = "";
+            Treatment_Search_View.DataSource = null;
+        }
+
+        public void ClearTreatmentAdd()
+        {
+            Treatment_Add_StudentNumber_TextBox.Text = "";
+            Treatment_Add_CurrentDate_DateTimePicker.Text = "";
+            Treatment_Add_Diagnosis_ComboBox.Text = "";
+            Treatment_Add_TreatmentNotes_TextBox.Text = "";
+            Treatment_Add_MedicineName_ComboBox.Text = "";
+            Treatment_Add_AmountDispensed_TextBox.Text = "";
+            Treatment_Add_Measurement_ComboBox.Text = "";
+            Treatment_Add_NextAppointment_DateTimePicker.Text = "";
+            Treatment_Add_IssuedBy_TextBox.Text = "";
+        }
+
+        public void ClearDiagnosisAdd()
+        {
+            Diagnosis_Add_DiagnosisName_TextBox.Text = "";
+        }
+
+        public void ClearDiagnosisStatistics()
+        {
+            Diagnosis_Statistic_DiagnosisType_ComboBox.Text = "";
+            Diagnosis_Statistic_StartDate_DateTimePicker.Text = "";
+            Diagnosis_Statistic_EndDate_DateTimePicker.Text = "";
+            Diagnosis_Statistic_Label_5.Text = "0";
+        }
+
+        public void ClearDiagnosisView()
+        {
+            Diagnosis_ViewAll.DataSource = null;
+        }
+
+        public void ClearMedicineAdd()
+        {
+            Medicine_Add_MedicineName_TextBox.Text = "";
+            Medicine_Add_StockAmount_TextBox.Text = "";
+            Medicine_Add_Measurement_ComboBox.Text = "";
+            Medicine_Add_ExpiryDate_TimeDatePicker.Text = "";
+            Medicine_Add_BatchNumber_TextBox.Text = "";
+        }
+
+        public void ClearMedicineEdit()
+        {
+            Medicine_Edit_MedicineName_ComboBox.Text = "";
+            Medicine_Edit_StockAmount_TextBox.Text = "";
+            Medicine_Edit_Measurement_ComboBox.Text = "";
+            Medicine_Edit_ExpiryDate_DateTimePicker.Text = "";
+            Medicine_Edit_BatchNumber_TextBox.Text = "";
+        }
+
+        public void ClearMedicineView()
+        {
+            Medicine_ViewAll.DataSource = null;
+        }
+
+        public void ClearAll()
+        {
+            ClearStudent();
+            ClearTreatmentAdd();
+            ClearTreatmentSearch();
+            ClearMedicineAdd();
+            ClearMedicineEdit();
+            ClearMedicineView();
+            ClearDiagnosisAdd();
+            ClearDiagnosisStatistics();
+            ClearDiagnosisView();
+        }
+
+        public void LoadMeasurment()
+        {
+            Medicine_Add_Measurement_ComboBox.Items.Clear();
+            Medicine_Add_Measurement_ComboBox.Items.Add("mcg (microgram)");
+            Medicine_Add_Measurement_ComboBox.Items.Add("mg (milligram)");
+            Medicine_Add_Measurement_ComboBox.Items.Add("g (gram)");
+            Medicine_Add_Measurement_ComboBox.Items.Add("ml (millilitre)");
+            Medicine_Add_Measurement_ComboBox.Items.Add("tablet/s");
+            Medicine_Edit_Measurement_ComboBox.Items.Clear();
+            Medicine_Edit_Measurement_ComboBox.Items.Add("mcg (microgram)");
+            Medicine_Edit_Measurement_ComboBox.Items.Add("mg (milligram)");
+            Medicine_Edit_Measurement_ComboBox.Items.Add("g (gram)");
+            Medicine_Edit_Measurement_ComboBox.Items.Add("ml (millilitre)");
+            Medicine_Edit_Measurement_ComboBox.Items.Add("tablet/s");
+            Treatment_Add_Measurement_ComboBox.Items.Clear();
+            Treatment_Add_Measurement_ComboBox.Items.Add("mcg (microgram)");
+            Treatment_Add_Measurement_ComboBox.Items.Add("mg (milligram)");
+            Treatment_Add_Measurement_ComboBox.Items.Add("g (gram)");
+            Treatment_Add_Measurement_ComboBox.Items.Add("ml (millilitre)");
+            Treatment_Add_Measurement_ComboBox.Items.Add("tablet/s");
+        }
         //END...       
     }
 }
