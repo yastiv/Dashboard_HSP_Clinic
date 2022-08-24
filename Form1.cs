@@ -793,6 +793,141 @@ public void ClearStudent()
             Treatment_Add_Measurement_ComboBox.Items.Add("ml (millilitre)");
             Treatment_Add_Measurement_ComboBox.Items.Add("tablet/s");
         }
+        
+        
+        public void SideMenuButtons()
+        {
+            Notification_Button.BackColor = Color.LightSeaGreen;
+            Notification_Button.ForeColor = Color.Black;
+
+            Student_Button.BackColor = Color.LightSeaGreen;
+            Student_Button.ForeColor = Color.Black;
+
+            Treatment_Button.BackColor = Color.LightSeaGreen;
+            Treatment_Button.ForeColor = Color.Black;
+
+            Diagnosis_Button.BackColor = Color.LightSeaGreen;
+            Diagnosis_Button.ForeColor = Color.Black;
+
+            Medicine_Button.BackColor = Color.LightSeaGreen;
+            Medicine_Button.ForeColor = Color.Black;
+        }
+
+        public void MainPanels()
+        {
+            Notification_Page.Visible = false;
+
+            Student_Page.Visible = false;
+
+            Treatment_Add_Page.Visible = false;
+            Treatment_Search_Page.Visible = false;
+
+            Diagnosis_Add_Page.Visible = false;
+            Diagnosis_Statistic_Page.Visible = false;
+            Diagnosis_View_Page.Visible = false;
+
+            Medicine_View_Page.Visible = false;
+            Medicine_Add_Page.Visible = false;
+            Medicine_Edit_Page.Visible = false;
+        }
+
+        public void HeaderPanels()
+        {
+            Treatment_Header_Panel.Visible = false;
+            Diagnosis_Header_Panel.Visible = false;
+            Medicine_Header_Panel.Visible = false;
+            TreatmentHeader();
+            DiagnosisHeader();
+            MedicineHeader();
+        }
+
+        public void StudentButtonReset()
+        {
+            Student_Search_Button.BackColor = Color.LightSeaGreen;
+            Student_Search_Button.ForeColor = Color.Black;
+
+            Student_Edit_Button.BackColor = Color.LightSeaGreen;
+            Student_Edit_Button.ForeColor = Color.Black;
+
+            Student_Delete_Button.BackColor = Color.Red;
+            Student_Delete_Button.ForeColor = Color.Black;
+        }
+
+        public void TreatmentButtonReset()
+        {
+            Treatment_Add_Add_Button.BackColor = Color.LightSeaGreen;
+            Treatment_Add_Add_Button.ForeColor = Color.Black;
+
+            Treatment_Search_Search_Button.BackColor = Color.LightSeaGreen;
+            Treatment_Search_Search_Button.ForeColor = Color.Black;
+        }
+
+        public void TreatmentHeader()
+        {
+            Treatment_Header_Add_Button.BackColor = Color.LightSeaGreen;
+            Treatment_Header_Add_Button.ForeColor = Color.Black;
+
+            Treatment_Header_Search_Button.BackColor = Color.LightSeaGreen;
+            Treatment_Header_Search_Button.ForeColor = Color.Black;
+
+            Treatment_Header_Search_Button.BackColor = Color.LightSeaGreen;
+            Treatment_Header_Search_Button.ForeColor = Color.Black;
+        }
+
+        public void DiagnosisButtonReset()
+        {
+            Diagnosis_Add_Add_Button.BackColor = Color.LightSeaGreen;
+            Diagnosis_Add_Add_Button.ForeColor = Color.Black;
+
+            Diagnosis_Add_Edit_Button.BackColor = Color.LightSeaGreen;
+            Diagnosis_Add_Edit_Button.ForeColor = Color.Black;
+
+            Diagnosis_Add_Delete_Button.BackColor = Color.Red;
+            Diagnosis_Add_Delete_Button.ForeColor = Color.Black;
+
+            Diagnosis_Statistic_Search_Button.BackColor = Color.LightSeaGreen;
+            Diagnosis_Statistic_Search_Button.ForeColor = Color.Black;
+        }
+
+        public void MedicineButtonReset()
+        {
+            Medicine_Add_Add_Button.BackColor = Color.LightSeaGreen;
+            Medicine_Add_Add_Button.ForeColor = Color.Black;
+
+            Medicine_Edit_Edit_Button.BackColor = Color.LightSeaGreen;
+            Medicine_Edit_Edit_Button.ForeColor = Color.Black;
+
+            Medicine_Edit_Delete_Button.BackColor = Color.Red;
+            Medicine_Edit_Delete_Button.ForeColor = Color.Black;
+        }
+
+        public void DiagnosisHeader()
+        {
+            Diagnosis_Header_Add_Button.BackColor = Color.LightSeaGreen;
+            Diagnosis_Header_Add_Button.ForeColor = Color.Black;
+
+            Diagnosis_Header_Statistics_Button.BackColor = Color.LightSeaGreen;
+            Diagnosis_Header_Statistics_Button.ForeColor = Color.Black;
+
+            Diagnosis_Header_View_Button.BackColor = Color.LightSeaGreen;
+            Diagnosis_Header_View_Button.ForeColor = Color.Black;
+        }
+
+        public void MedicineHeader()
+        {
+            Medicine_Header_Edit_Button.BackColor = Color.LightSeaGreen;
+            Medicine_Header_Edit_Button.ForeColor = Color.Black;
+
+            Medicine_Header_Add_Button.BackColor = Color.LightSeaGreen;
+            Medicine_Header_Add_Button.ForeColor = Color.Black;
+
+            Medicine_Header_View_Button.BackColor = Color.LightSeaGreen;
+            Medicine_Header_View_Button.ForeColor = Color.Black;
+        }
+        
+        
+        
+        
         //END...       
     }
 }
