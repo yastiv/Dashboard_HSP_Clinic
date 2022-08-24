@@ -434,7 +434,70 @@ namespace Build_4
             //Database...
             
         }
-        
+        static string[] Scopes = { CalendarService.Scope.CalendarReadonly };
+        static string ApplicationName = "Google Calendar API .NET Quickstart";
+
+        public void UpcomingAppointments() 
+        {
+            try
+            {
+                UserCredential credential;
+                // Load client secrets.
+                using (var stream = new System.IO.FileStream("client_secret_799015457665-9ck91256drtu81lgksedu7kh8m1lahch.apps.googleusercontent.com.json", FileMode.Open, FileAccess.Read))
+                {
+                    /* The file token.json stores the user's access and refresh tokens, and is created
+                     automatically when the authorization flow completes for the first time. */
+                    string credPath = "token.json";
+                    credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+                        GoogleClientSecrets.FromStream(stream).Secrets,
+                        Scopes,
+                        "user",
+                        CancellationToken.None,
+                        new FileDataStore(credPath, true)).Result;
+                }
+
+                // Create Google Calendar API service.
+                var service = new CalendarService(new BaseClientService.Initializer
+                {
+                    HttpClientInitializer = credential,
+                    ApplicationName = ApplicationName
+                });
+
+                // Define parameters of request.
+                EventsResource.ListRequest request = service.Events.List("primary");
+                request.TimeMin = DateTime.Now;
+                request.ShowDeleted = false;
+                request.SingleEvents = true;
+                request.MaxResults = 10;
+                request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
+
+
+                // List events.
+                Events events = request.Execute();
+                if (events.Items != null && events.Items.Count > 0)
+                {
+                    AppointmentLabel.Text = "";
+                    foreach (var eventItem in events.Items)
+                    {
+                        AppointmentLabel.Text += eventItem.Start.DateTime + " \t " +eventItem.Summary.Remove(eventItem.Summary.Length - 17) + Environment.NewLine;
+                    }
+                }
+                else
+                {
+                    AppointmentLabel.Text = "No Upcoming Events";
+                }
+            }
+            catch
+            {
+                AppointmentLabel.Text = "Error";
+            }
+        }
+
+        private void Notification_Timer_Tick(object sender, EventArgs e)
+        {
+            UpcomingAppointments();
+        }
+
         //END...       
     }
 }
