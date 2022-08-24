@@ -498,6 +498,249 @@ namespace Build_4
             UpcomingAppointments();
         }
 
+public void ClearStudent()
+        {
+            Student_StudentNumber_TextBox.Text = "";
+            Student_FirstName_TextBox.Text = "";
+            Student_LastName_TextBox.Text = "";
+            Student_Address_TextBox.Text = "";
+            Student_Email_TextBox.Text = "";
+            Student_PhoneNumber_TextBox.Text = "";
+            Student_Gender_Male_RadioButton.Checked = false;
+            Student_Gender_Female_RadioButton.Checked = false;
+            Student_DateOfBirth_DateTimePicker.Text = "";
+            Student_Allergies_TextBox.Text = "";
+        }
+
+        public void ClearTreatmentSearch()
+        {
+            Treatment_Search_StudentNumber_TextBox.Text = "";
+            Treatment_Search_View.DataSource = null;
+        }
+
+        public void ClearTreatmentAdd()
+        {
+            Treatment_Add_StudentNumber_TextBox.Text = "";
+            Treatment_Add_CurrentDate_DateTimePicker.Text = "";
+            Treatment_Add_Diagnosis_ComboBox.Text = "";
+            Treatment_Add_TreatmentNotes_TextBox.Text = "";
+            Treatment_Add_MedicineName_ComboBox.Text = "";
+            Treatment_Add_AmountDispensed_TextBox.Text = "";
+            Treatment_Add_Measurement_ComboBox.Text = "";
+            Treatment_Add_NextAppointment_DateTimePicker.Text = "";
+            Treatment_Add_IssuedBy_TextBox.Text = "";
+        }
+
+        public void ClearDiagnosisAdd()
+        {
+            Diagnosis_Add_DiagnosisName_TextBox.Text = "";
+        }
+
+        public void ClearDiagnosisStatistics()
+        {
+            Diagnosis_Statistic_DiagnosisType_ComboBox.Text = "";
+            Diagnosis_Statistic_StartDate_DateTimePicker.Text = "";
+            Diagnosis_Statistic_EndDate_DateTimePicker.Text = "";
+            Diagnosis_Statistic_Label_5.Text = "0";
+        }
+
+        public void ClearDiagnosisView()
+        {
+            Diagnosis_ViewAll.DataSource = null;
+        }
+
+        public void ClearMedicineAdd()
+        {
+            Medicine_Add_MedicineName_TextBox.Text = "";
+            Medicine_Add_StockAmount_TextBox.Text = "";
+            Medicine_Add_Measurement_ComboBox.Text = "";
+            Medicine_Add_ExpiryDate_TimeDatePicker.Text = "";
+            Medicine_Add_BatchNumber_TextBox.Text = "";
+        }
+
+        public void ClearMedicineEdit()
+        {
+            Medicine_Edit_MedicineName_ComboBox.Text = "";
+            Medicine_Edit_StockAmount_TextBox.Text = "";
+            Medicine_Edit_Measurement_ComboBox.Text = "";
+            Medicine_Edit_ExpiryDate_DateTimePicker.Text = "";
+            Medicine_Edit_BatchNumber_TextBox.Text = "";
+        }
+
+        public void ClearMedicineView()
+        {
+            Medicine_ViewAll.DataSource = null;
+        }
+
+        public void ClearAll()
+        {
+            ClearStudent();
+            ClearTreatmentAdd();
+            ClearTreatmentSearch();
+            ClearMedicineAdd();
+            ClearMedicineEdit();
+            ClearMedicineView();
+            ClearDiagnosisAdd();
+            ClearDiagnosisStatistics();
+            ClearDiagnosisView();
+        }
+
+        public void LoadMeasurment()
+        {
+            Medicine_Add_Measurement_ComboBox.Items.Clear();
+            Medicine_Add_Measurement_ComboBox.Items.Add("mcg (microgram)");
+            Medicine_Add_Measurement_ComboBox.Items.Add("mg (milligram)");
+            Medicine_Add_Measurement_ComboBox.Items.Add("g (gram)");
+            Medicine_Add_Measurement_ComboBox.Items.Add("ml (millilitre)");
+            Medicine_Add_Measurement_ComboBox.Items.Add("tablet/s");
+            Medicine_Edit_Measurement_ComboBox.Items.Clear();
+            Medicine_Edit_Measurement_ComboBox.Items.Add("mcg (microgram)");
+            Medicine_Edit_Measurement_ComboBox.Items.Add("mg (milligram)");
+            Medicine_Edit_Measurement_ComboBox.Items.Add("g (gram)");
+            Medicine_Edit_Measurement_ComboBox.Items.Add("ml (millilitre)");
+            Medicine_Edit_Measurement_ComboBox.Items.Add("tablet/s");
+            Treatment_Add_Measurement_ComboBox.Items.Clear();
+            Treatment_Add_Measurement_ComboBox.Items.Add("mcg (microgram)");
+            Treatment_Add_Measurement_ComboBox.Items.Add("mg (milligram)");
+            Treatment_Add_Measurement_ComboBox.Items.Add("g (gram)");
+            Treatment_Add_Measurement_ComboBox.Items.Add("ml (millilitre)");
+            Treatment_Add_Measurement_ComboBox.Items.Add("tablet/s");
+        }
+        
+        
+        public void SideMenuButtons()
+        {
+            Notification_Button.BackColor = Color.LightSeaGreen;
+            Notification_Button.ForeColor = Color.Black;
+
+            Student_Button.BackColor = Color.LightSeaGreen;
+            Student_Button.ForeColor = Color.Black;
+
+            Treatment_Button.BackColor = Color.LightSeaGreen;
+            Treatment_Button.ForeColor = Color.Black;
+
+            Diagnosis_Button.BackColor = Color.LightSeaGreen;
+            Diagnosis_Button.ForeColor = Color.Black;
+
+            Medicine_Button.BackColor = Color.LightSeaGreen;
+            Medicine_Button.ForeColor = Color.Black;
+        }
+
+        public void MainPanels()
+        {
+            Notification_Page.Visible = false;
+
+            Student_Page.Visible = false;
+
+            Treatment_Add_Page.Visible = false;
+            Treatment_Search_Page.Visible = false;
+
+            Diagnosis_Add_Page.Visible = false;
+            Diagnosis_Statistic_Page.Visible = false;
+            Diagnosis_View_Page.Visible = false;
+
+            Medicine_View_Page.Visible = false;
+            Medicine_Add_Page.Visible = false;
+            Medicine_Edit_Page.Visible = false;
+        }
+
+        public void HeaderPanels()
+        {
+            Treatment_Header_Panel.Visible = false;
+            Diagnosis_Header_Panel.Visible = false;
+            Medicine_Header_Panel.Visible = false;
+            TreatmentHeader();
+            DiagnosisHeader();
+            MedicineHeader();
+        }
+
+        public void StudentButtonReset()
+        {
+            Student_Search_Button.BackColor = Color.LightSeaGreen;
+            Student_Search_Button.ForeColor = Color.Black;
+
+            Student_Edit_Button.BackColor = Color.LightSeaGreen;
+            Student_Edit_Button.ForeColor = Color.Black;
+
+            Student_Delete_Button.BackColor = Color.Red;
+            Student_Delete_Button.ForeColor = Color.Black;
+        }
+
+        public void TreatmentButtonReset()
+        {
+            Treatment_Add_Add_Button.BackColor = Color.LightSeaGreen;
+            Treatment_Add_Add_Button.ForeColor = Color.Black;
+
+            Treatment_Search_Search_Button.BackColor = Color.LightSeaGreen;
+            Treatment_Search_Search_Button.ForeColor = Color.Black;
+        }
+
+        public void TreatmentHeader()
+        {
+            Treatment_Header_Add_Button.BackColor = Color.LightSeaGreen;
+            Treatment_Header_Add_Button.ForeColor = Color.Black;
+
+            Treatment_Header_Search_Button.BackColor = Color.LightSeaGreen;
+            Treatment_Header_Search_Button.ForeColor = Color.Black;
+
+            Treatment_Header_Search_Button.BackColor = Color.LightSeaGreen;
+            Treatment_Header_Search_Button.ForeColor = Color.Black;
+        }
+
+        public void DiagnosisButtonReset()
+        {
+            Diagnosis_Add_Add_Button.BackColor = Color.LightSeaGreen;
+            Diagnosis_Add_Add_Button.ForeColor = Color.Black;
+
+            Diagnosis_Add_Edit_Button.BackColor = Color.LightSeaGreen;
+            Diagnosis_Add_Edit_Button.ForeColor = Color.Black;
+
+            Diagnosis_Add_Delete_Button.BackColor = Color.Red;
+            Diagnosis_Add_Delete_Button.ForeColor = Color.Black;
+
+            Diagnosis_Statistic_Search_Button.BackColor = Color.LightSeaGreen;
+            Diagnosis_Statistic_Search_Button.ForeColor = Color.Black;
+        }
+
+        public void MedicineButtonReset()
+        {
+            Medicine_Add_Add_Button.BackColor = Color.LightSeaGreen;
+            Medicine_Add_Add_Button.ForeColor = Color.Black;
+
+            Medicine_Edit_Edit_Button.BackColor = Color.LightSeaGreen;
+            Medicine_Edit_Edit_Button.ForeColor = Color.Black;
+
+            Medicine_Edit_Delete_Button.BackColor = Color.Red;
+            Medicine_Edit_Delete_Button.ForeColor = Color.Black;
+        }
+
+        public void DiagnosisHeader()
+        {
+            Diagnosis_Header_Add_Button.BackColor = Color.LightSeaGreen;
+            Diagnosis_Header_Add_Button.ForeColor = Color.Black;
+
+            Diagnosis_Header_Statistics_Button.BackColor = Color.LightSeaGreen;
+            Diagnosis_Header_Statistics_Button.ForeColor = Color.Black;
+
+            Diagnosis_Header_View_Button.BackColor = Color.LightSeaGreen;
+            Diagnosis_Header_View_Button.ForeColor = Color.Black;
+        }
+
+        public void MedicineHeader()
+        {
+            Medicine_Header_Edit_Button.BackColor = Color.LightSeaGreen;
+            Medicine_Header_Edit_Button.ForeColor = Color.Black;
+
+            Medicine_Header_Add_Button.BackColor = Color.LightSeaGreen;
+            Medicine_Header_Add_Button.ForeColor = Color.Black;
+
+            Medicine_Header_View_Button.BackColor = Color.LightSeaGreen;
+            Medicine_Header_View_Button.ForeColor = Color.Black;
+        }
+        
+        
+        
+        
         //END...       
     }
 }
